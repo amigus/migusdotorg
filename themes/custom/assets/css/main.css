@@ -1,8 +1,10 @@
 body {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Reddit Sans", sans-serif;
+  background-color: #c0c0c000;
+  margin: 1rem;
 }
 
 #copyright {
-  font-size: 0.83em;
+  font-size: 0.78em;
   color: #666;
 }
