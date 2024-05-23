@@ -6,6 +6,8 @@ title = 'adam@migus.org'
 theme = 'custom'
 author = 'Adam Migus'
 copyright = '©️ 2024 Adam Migus. All rights reserved.'
+[params]
+  googleFont = 'Droid Sans'
 [services]
   [services.googleAnalytics]
     id = 'G-0H4BE185DF'

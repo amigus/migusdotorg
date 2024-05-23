@@ -1,10 +1,7 @@
 body {
-  font-family: "Reddit Sans", sans-serif;
-  background-color: #c0c0c000;
   margin: 1rem;
 }
 
 #copyright {
-  font-size: 0.78em;
-  color: #666;
+  font-size: 0.75rem;
 }

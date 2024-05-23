@@ -1,8 +1,13 @@
-<link rel="icon" href="favicon.ico" />
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Reddit Sans" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family={{ site.Params.googleFont }}" rel="stylesheet"/>
+<style>
+  body {
+    font-family: '{{ site.Params.googleFont }}', sans-serif;
+  }
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
 {{ partialCached "head/css.html" . }}
 {{ partialCached "head/js.html" . }}
