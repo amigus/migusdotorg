@@ -1,0 +1,11 @@
+baseURL = 'https://migus.org/'
+enableEmoji = true
+enableRobotsTXT = true
+languageCode = 'en-us'
+title = 'Migus Dot Org'
+theme = 'custom'
+author = 'Adam Migus'
+copyright = '©️ 2024 Adam Migus. All rights reserved.'
+[services]
+  [services.googleAnalytics]
+    id = 'G-0H4BE185DF'
