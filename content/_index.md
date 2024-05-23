@@ -16,4 +16,4 @@ I also maintain servers and publish my email server configuration in a public
 [repository](https://github.com/amigus/cyrus-imap-server) on my
 [GitHub](https://github.com/amigus) so check that out!
 
-Thanks for taking the time to read this page. 😊👋
+Thanks for taking the time to read this page. :smiley::wave:
