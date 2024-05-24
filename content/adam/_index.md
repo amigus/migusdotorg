@@ -2,7 +2,7 @@
 title = 'adam@migus.org'
 +++
 
-I am Founder and CEO of [The Migus Group](https://migusgroup.com). :necktie:
+I am the CEO of [The Migus Group](https://migusgroup.com) since funding the company in February 2014. :necktie:
 
 I have public profiles as "amigus" on
 [LinkedIn](https://www.linkedin.com/in/amigus/) and
