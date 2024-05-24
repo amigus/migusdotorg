@@ -3,12 +3,8 @@ enableEmoji = true
 enableRobotsTXT = true
 languageCode = 'en-us'
 title = 'adam@migus.org'
-theme = 'custom'
 author = 'Adam Migus'
 copyright = '©️ 2024 Adam Migus. All rights reserved.'
-description = 'Some information about the domain and the person who owns it.'
-[params]
-  googleFont = 'Nunito Sans'
 [services]
   [services.googleAnalytics]
     id = 'G-0H4BE185DF'
