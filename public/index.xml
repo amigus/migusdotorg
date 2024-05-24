@@ -8,5 +8,12 @@
     <language>en-us</language>
     <copyright>©️ 2024 Adam Migus. All rights reserved.</copyright>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>adam@migus.org</title>
+      <link>http://localhost:1313/adam/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/adam/</guid>
+      <description>I am Founder and CEO of The Migus Group. &amp;#x1f454;&#xA;I have public profiles as &amp;ldquo;amigus&amp;rdquo; on LinkedIn and X where, by the way, you can check the fingerprint of my GPG key. &amp;#x1f50f;&#xA;I write software and publish some of it in Gists and public repos on my GitHub! &amp;#x1f913;</description>
+    </item>
   </channel>
 </rss>
