@@ -5,3 +5,13 @@ body {
 #copyright {
   font-size: 0.7rem;
 }
+
+#redirect {
+  font-family: sans-serif;
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+#redirect_cb {
+  vertical-align: middle;
+}

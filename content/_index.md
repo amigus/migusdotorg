@@ -16,4 +16,5 @@ I also publish the scripts that build my email server in a public
 [repo](https://github.com/amigus/cyrus-imap-server) on my
 [GitHub](https://github.com/amigus)! :nerd_face:
 
-Thanks for taking the time to read this page. :wave:
+I lead [The Migus Group](https://migusgroup.com).
+It helps companies improve their cybersecurity through risk reduction and resiliency. :necktie:
