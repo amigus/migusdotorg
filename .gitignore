@@ -3,3 +3,4 @@ resources/_gen/**
 node_modules/**
 package.json
 package-lock.json
+public/**
