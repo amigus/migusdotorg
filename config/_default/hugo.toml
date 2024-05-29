@@ -2,7 +2,7 @@ baseURL = 'https://migus.org/'
 enableEmoji = true
 enableRobotsTXT = true
 languageCode = 'en-us'
-title = 'adam@migus.org'
+title = 'migus.org'
 author = 'Adam Migus'
 copyright = '©️ 2024 Adam Migus. All rights reserved.'
 [services]
