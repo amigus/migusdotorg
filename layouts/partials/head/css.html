@@ -7,3 +7,12 @@
     {{- end }}
   {{- end }}
 {{- end }}
+{{- if .Site.Params.googleFont }}
+  <link href="https://fonts.googleapis.com/css?family={{ .Site.Params.googleFont }}" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: '{{ .Site.Params.googleFont }}', sans-serif;
+    }
+  </style>
+{{- end }}
+</style>
