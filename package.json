@@ -1,0 +1,12 @@
+{
+  "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
+  "dependencies": {
+    "postcss-cli": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=18.20.4"
+  },
+  "scripts": {
+    "build": "hugo --gc --minify"
+  }
+}
