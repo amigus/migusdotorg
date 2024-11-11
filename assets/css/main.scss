@@ -1,0 +1,27 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+$code-font: 'IBM Plex Mono';
+$text-font: 'Lato';
+
+body {
+  margin: 3em 3em;
+  font-family: $text-font;
+}
+
+#copyright {
+  font-size: 0.7rem;
+}
+
+code.language-PowerShell {
+  color: #cccccc;
+  font-family: $code-font;
+  font-size: 0.77rem;
+}
+
+pre {
+  background-color: #012456;
+  border-radius: 0.17rem;
+  margin: 1em;
+  padding: 0em 1em 1em;
+}
+
