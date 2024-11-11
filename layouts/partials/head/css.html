@@ -1,18 +1,12 @@
-{{- with resources.Get "css/main.css" }}
-  {{- if eq hugo.Environment "development" }}
-    <link rel="stylesheet" href="{{ .RelPermalink }}">
-  {{- else }}
-    {{- with . | minify | fingerprint }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+{{- range slice "css/copy-button.scss" "css/main.scss" }}
+  {{- with resources.Get . | postCSS | toCSS }}
+    {{- if eq hugo.Environment "development" }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{- else }}
+      {{- with . | minify | fingerprint }}
+        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+      {{- end }}
     {{- end }}
   {{- end }}
 {{- end }}
-{{- if .Site.Params.googleFont }}
-  <link href="https://fonts.googleapis.com/css?family={{ .Site.Params.googleFont }}" rel="stylesheet"/>
-  <style>
-    body {
-      font-family: '{{ .Site.Params.googleFont }}', sans-serif;
-    }
-  </style>
-{{- end }}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Lato" rel="stylesheet"/>
