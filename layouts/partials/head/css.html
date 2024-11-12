@@ -9,4 +9,6 @@
     {{- end }}
   {{- end }}
 {{- end }}
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Lato" rel="stylesheet"/>
+{{- range .Site.Params.GoogleFonts }}
+  <link href="https://fonts.googleapis.com/css2?family={{ . }}" rel="stylesheet"/>
+{{- end }}
