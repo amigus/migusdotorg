@@ -1,14 +1,14 @@
 {{- range slice "css/copy-button.scss" "css/main.scss" }}
-  {{- with resources.Get . | postCSS | toCSS }}
+  {{- with resources.Get . | toCSS (dict "transpiler" "libsass" "vars" site.Params.style ) }}
     {{- if eq hugo.Environment "development" }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}">
+  <link rel="stylesheet" href="{{ .RelPermalink }}">
     {{- else }}
       {{- with . | minify | fingerprint }}
-        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
       {{- end }}
     {{- end }}
   {{- end }}
 {{- end }}
-{{- range .Site.Params.GoogleFonts }}
-  <link href="https://fonts.googleapis.com/css2?family={{ . }}" rel="stylesheet"/>
+{{- range site.Params.GoogleFonts }}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={{ . }}"/>
 {{- end }}

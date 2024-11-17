@@ -1,27 +1,45 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
-
-$code-font: 'IBM Plex Mono';
-$text-font: 'Lato';
+@import "hugo:vars";
 
 body {
-  margin: 3em 3em;
   font-family: $text-font;
+  margin: 3em 3em;
 }
 
 #copyright {
   font-size: 0.7rem;
+  padding-top: 1em;
+}
+
+code {
+  font-family: $code-font;
 }
 
 code.language-PowerShell {
   color: #cccccc;
-  font-family: $code-font;
-  font-size: 0.77rem;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+}
+
+
+div.posts {
+  margin: 0em 1em;
+  p.title {
+    font-size: 0.91em;
+  }
+  p.summary {
+    margin: 0em 1em;
+    font-size: 0.83em;
+  }
 }
 
 pre {
-  background-color: #012456;
-  border-radius: 0.17rem;
+  background-color: #000000;
+  border-radius: 0.13rem;
   margin: 1em;
+  max-width: 150ch;
+  min-width: 100ch;
   padding: 0em 1em 1em;
+  width: 75%;
 }
 
