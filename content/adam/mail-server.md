@@ -11,7 +11,7 @@ keywords = [
 tags = ['linux']
 title = 'My Email Server'
 summary = 'About my containerized Cyrus IMAP + OpenLDAP + Postfix email server'
-weight = 20
+weight = 50
 +++
 
 I have been running my own email server since 2001.
