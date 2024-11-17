@@ -8,22 +8,31 @@ body {
 
 #copyright {
   font-size: 0.7rem;
-  padding-top: 1em;
+  padding: 1.5em 0em 0em;
 }
 
 code {
   font-family: $code-font;
-}
-
-code.language-PowerShell {
-  color: #cccccc;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   white-space: pre-wrap;
 }
 
+pre:has(> code) {
+  background-color: #000000;
+  color: #cccccc;
+  border-radius: 0.13rem;
+  margin: 1em;
+  max-width: 150ch;
+  min-width: 100ch;
+  padding: 0em 1em 1em;
+  width: 75%;
+}
 
-div.posts {
-  margin: 0em 1em;
+pre:has(> code.language-PowerShell) {
+  background-color: rgb(1, 36, 86);
+}
+
+div.pages {
   p.title {
     font-size: 0.91em;
   }
@@ -31,15 +40,6 @@ div.posts {
     margin: 0em 1em;
     font-size: 0.83em;
   }
-}
-
-pre {
-  background-color: #000000;
-  border-radius: 0.13rem;
-  margin: 1em;
-  max-width: 150ch;
-  min-width: 100ch;
-  padding: 0em 1em 1em;
-  width: 75%;
+  margin: 0em 1em;
 }
 
