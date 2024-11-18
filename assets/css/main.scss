@@ -3,12 +3,7 @@
 
 body {
   font-family: $text-font;
-  margin: 3em 3em;
-}
-
-#copyright {
-  font-size: 0.7rem;
-  padding: 1.5em 0em 0em;
+  margin: 2em 3em;
 }
 
 code {
@@ -18,14 +13,14 @@ code {
 }
 
 pre:has(> code) {
-  background-color: #000000;
-  color: #cccccc;
+  background-color: black;
+  color: lightgray;
   border-radius: 0.13rem;
   margin: 1em;
-  max-width: 150ch;
-  min-width: 100ch;
+  max-width: 120ch;
+  min-width: 70ch;
   padding: 0em 1em 1em;
-  width: 75%;
+  width: 80%;
 }
 
 pre:has(> code.language-PowerShell) {
@@ -34,12 +29,16 @@ pre:has(> code.language-PowerShell) {
 
 div.pages {
   p.title {
-    font-size: 0.91em;
+    font-style: italic;
   }
   p.summary {
-    margin: 0em 1em;
-    font-size: 0.83em;
+    font-size: 0.9em;
+    margin-left: 1em;
   }
-  margin: 0em 1em;
+  margin-left: 1em;
 }
 
+#copyright {
+  font-size: 0.7rem;
+  padding-top: 1.5em;
+}
