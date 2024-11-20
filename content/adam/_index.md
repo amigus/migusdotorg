@@ -26,5 +26,3 @@ where, by the way, you can check the fingerprint of my GPG
 
 I write software and publish some of it in [Gists](https://gist.github.com/amigus)
 and on my [GitHub](https://github.com/amigus).
-
-I post here too:

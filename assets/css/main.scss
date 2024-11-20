@@ -18,7 +18,7 @@ pre:has(> code) {
   border-radius: 0.13rem;
   margin: 1em;
   max-width: 120ch;
-  min-width: 70ch;
+  min-width: 40ch;
   padding: 0em 1em 1em;
   width: 80%;
 }
@@ -27,12 +27,16 @@ pre:has(> code.language-PowerShell) {
   background-color: rgb(1, 36, 86);
 }
 
-div.pages {
+div.posts {
   p.title {
     font-style: italic;
   }
   p.summary {
     font-size: 0.9em;
+    margin-left: 1em;
+  }
+  p.date {
+    font-size: 0.8em;
     margin-left: 1em;
   }
   margin-left: 1em;
