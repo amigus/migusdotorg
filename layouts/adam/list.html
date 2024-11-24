@@ -6,7 +6,8 @@
   {{- range .Pages }}
     <p class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
     <p class="summary">{{ .Summary }}</p>
-    <p class="date">{{ .Date.Format "2006-01-02" }}</p>
+    <p class="date">{{ .Date.Format "2006-1-1" }}</p>
   {{- end }}
   </div>
+  <a href="..">../</a>
 {{ end }}

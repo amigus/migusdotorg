@@ -6,10 +6,10 @@ title = 'migus.org'
 author = 'Adam Migus'
 copyright = '©️ 2024 Adam Migus. All rights reserved.'
 [params]
-  googleFonts = ['Source Code Pro', 'PT Sans']
+  googleFonts = ['Fira Mono', 'Lato']
   [params.style]
-    code-font = 'Source Code Pro'
-    text-font = 'PT Sans'
+    code-font = 'Fira Mono'
+    text-font = 'Lato'
 [services]
   [services.googleAnalytics]
     id = 'G-0H4BE185DF'
