@@ -1,14 +1,13 @@
-{{- range slice "css/copy-button.scss" "css/main.scss" }}
-  {{- with resources.Get . | toCSS (dict "transpiler" "libsass" "vars" site.Params.style ) }}
-    {{- if eq hugo.Environment "development" }}
-  <link rel="stylesheet" href="{{ .RelPermalink }}">
-    {{- else }}
-      {{- with . | minify | fingerprint }}
-  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-      {{- end }}
+{{- $styles := slice }}
+{{- range resources.Match "scss/*.scss" }}
+  {{- $styles = $styles | append . }}
+{{- end }}
+{{- with $styles | resources.Concat "styles.css" | toCSS | resources.PostCSS }}
+  {{- if eq hugo.Environment "development" }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}">
+  {{- else }}
+    {{- with . | minify | fingerprint }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
     {{- end }}
   {{- end }}
-{{- end }}
-{{- range site.Params.GoogleFonts }}
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={{ . }}"/>
 {{- end }}

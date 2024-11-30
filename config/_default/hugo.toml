@@ -5,11 +5,6 @@ languageCode = 'en-us'
 title = 'migus.org'
 author = 'Adam Migus'
 copyright = '©️ 2024 Adam Migus. All rights reserved.'
-[params]
-  googleFonts = ['Fira Mono', 'Lato']
-  [params.style]
-    code-font = 'Fira Mono'
-    text-font = 'Lato'
 [services]
   [services.googleAnalytics]
     id = 'G-0H4BE185DF'

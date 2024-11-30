@@ -1,0 +1,8 @@
+<h2>Posts</h2>
+{{- range .Pages }}
+<section>
+    <p class="italic underline"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+    <p class="m-2 text-sm">{{ .Summary }}</p>
+    <p class="italic m-2 text-xs">{{ .Date.Format "2006-1-1" }}</p>
+</section>
+{{- end }}

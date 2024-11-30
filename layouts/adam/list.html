@@ -1,13 +1,6 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
   <p>{{ .Content }}</p>
-  <h2>Posts</h2>
-  <div class="posts">
-  {{- range .Pages }}
-    <p class="title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
-    <p class="summary">{{ .Summary }}</p>
-    <p class="date">{{ .Date.Format "2006-1-1" }}</p>
-  {{- end }}
-  </div>
-  <a href="..">../</a>
+  {{- partialCached "posts.html" . }}
+  <a class="italic" href="..">../</a>
 {{ end }}

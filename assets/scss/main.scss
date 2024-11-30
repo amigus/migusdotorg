@@ -1,45 +1,23 @@
-body {
-  font-family: $text-font;
-  margin: 3% 13%;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+  @apply text-blue-800 hover:underline;
 }
 
-code {
-  font-family: $code-font;
-  font-size: 0.85rem;
-  white-space: pre-wrap;
+h1 {
+  @apply font-bold text-3xl py-4;
 }
 
-pre:has(> code) {
-  background-color: black;
-  color: lightgray;
-  border-radius: 0.13rem;
-  margin: 1em;
-  max-width: 120ch;
-  min-width: 40ch;
-  padding: 0em 1em 1em;
-  width: 80%;
+h2 {
+  @apply font-semibold text-2xl py-3;
 }
 
-pre:has(> code.language-PowerShell) {
-  background-color: rgb(1, 36, 86);
+h3 {
+  @apply text-xl py-2;
 }
 
-div.posts {
-  p.title {
-    font-style: italic;
-  }
-  p.summary {
-    font-size: 0.9em;
-    margin-left: 1em;
-  }
-  p.date {
-    font-size: 0.8em;
-    margin-left: 1em;
-  }
-  margin-left: 1em;
-}
-
-#copyright {
-  font-size: 0.7rem;
-  padding-top: 1.5em;
+p {
+  @apply py-1;
 }
