@@ -1,6 +1,6 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
   <p>{{ .Content }}</p>
-  {{- partialCached "posts.html" . }}
-  <a class="italic" href="..">../</a>
+  {{- partialCached "adam/posts.html" . }}
+  {{- partialCached "up.html" . }}
 {{ end }}
