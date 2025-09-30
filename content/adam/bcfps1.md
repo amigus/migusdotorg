@@ -18,20 +18,20 @@ that allow users to use 1kb instead of 1024 and so on with megabytes, gigaby
 
 This is feature of PowerShell is commonly used with commands like [Set-VMMemory](https://learn.microsoft.com/en-us/powershell/module/hyper-v/set-vmmemory?view=windowsserver2022-ps):
 
-{{< codeblock PowerShell >}}
+```PowerShell
 Set-VMMemory -StartupBytes 4gb -MinimumBytes 2gb MyVirtualMachine
-{{< /codeblock >}}
+```
 
 It also makes conversion a simple matter of division, multiplication and (optionally) typecasting:
 
-{{< codeblock PowerShell >}}
+```PowerShell
 Get-ChildItem -File |
 Sort-Object Length |
 Select-Object -Last 10 @{
     Name='Size (MB)'
     Expression={[long]($_.Length / 1mb)}
 }, Name, Modified
-{{< /codeblock >}}
+```
 
 That works, but I found it tedious to type and that it made my code less readable.
 So I wrote [ByteCalculationFunctions.ps1](https://gist.github.com/amigus/555b34d0b1c872c33f3fee55c7ed17e9)
@@ -39,34 +39,34 @@ to make it easier to read and type commands that include byte conversion.
 
 For example, to get an integer representation of the number of bytes in 9 gigabyte:
 
-{{< codeblock PowerShell >}}
+```PowerShell
 bytesfromgigs 9 # will return 9663676416
-{{< /codeblock >}}
+```
 
 So, the expression above is (slightly) easier to write and read:
 
-{{< codeblock PowerShell >}}
+```PowerShell
 Get-ChildItem -File |
 Sort-Object Length |
 Select-Object -Last 10 @{
     Name='Size (MB)'
     Expression={bytestomegs $_.Length}
 }, Name, Modified
-{{< /codeblock >}}
+```
 
 Also, they take advantage of PowerShell
 [Pipelines](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pipelines)
 to make inline conversion easier and more readable:
 
-{{< codeblock PowerShell no-copy >}}
+```PowerShell
 1024 | bytestok # 1
 260046848 | bytestomegs # 260046848
 7 | bytesfromgigs | bytestomegs # 7168
 259072 | bytesfrommegs | bytestogigs # 253
-{{< /codeblock >}}
+```
 
 To use them, import them into your current PowerShell session:
 
-{{< codeblock PowerShell >}}
+```PowerShell
 Invoke-WebRequest https://mig.us/bcfps1 | Invoke-Expression
-{{< /codeblock >}}
+```
