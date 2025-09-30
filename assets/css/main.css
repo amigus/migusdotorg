@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    @apply bg-gray-100 text-base/relaxed;
+  }
+
+  h1 {
+    @apply font-bold sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl py-5;
+  }
+
+  h2 {
+    @apply font-semibold sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl py-4;
+  }
+
+  h3 {
+    @apply sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl py-3;
+  }
+
+  h4 {
+    @apply sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl py-2;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans;
+  }
+
+  li {
+    @apply mx-3;
+  }
+
+  li, p {
+    @apply px-3 py-2;
+  }
+
+  ol, ul {
+    @apply m-3;
+  }
+
+  a {
+    @apply text-blue-600 hover:text-blue-800 visited:text-purple-600;
+  }
+
+  code {
+    @apply font-mono whitespace-pre-wrap;
+  }
+
+  pre {
+    @apply m-4 p-4 w-7/8 rounded-md;
+  }
+}
+
+@layer components {
+  .container {
+    @apply m-auto w-auto;
+  }
+}
+
+@theme {
+  --font-mono: 'Open Sans';
+  --font-sans: Lato;
+}
+

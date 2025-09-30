@@ -11,21 +11,18 @@ document.addEventListener("DOMContentLoaded", function() {
         button.appendChild(icon);
 
         button.addEventListener("click", function() {
-            const code = block.innerText;
+            const code = block.textContent;
             navigator.clipboard.writeText(code).then(() => {
                 icon.classList.remove('fa-clone');
                 icon.classList.add('fa-clipboard');
                 setTimeout(() => {
                     icon.classList.remove('fa-clipboard');
                     icon.classList.add('fa-clone');
-                }, 300); // Change icon for 300 milliseconds
+                }, 250);
             }).catch(err => {
-                console.error("Failed to copy text: ", err);
+                console.error(`Failed to copy text from block: ${block.textContent}. Error: `, err);
             });
         });
-
-        const pre = block.parentNode;
-        pre.style.position = "relative";
-        pre.appendChild(button);
+        block.parentNode.appendChild(button);
     });
 });

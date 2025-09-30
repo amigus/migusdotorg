@@ -1,0 +1,29 @@
+pre .copy-button {
+    display: none;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    background-color: transparent;
+    color: lightgray;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: opacity 0.25s ease;
+}
+pre .copy-button i {
+    font-size: 14px;
+}
+pre .copy-button:hover {
+    color: white;
+}
+pre .copy-button.dim {
+    opacity: 0.8;
+}
+pre:hover .copy-button {
+    opacity: 0.7;
+}
+pre .copy-button {
+    display: block;
+    opacity: 0.2;
+}

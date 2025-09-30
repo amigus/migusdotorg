@@ -1,14 +1,19 @@
 {
   "dependencies": {
-    "autoprefixer": "^10.x",
-    "postcss": "^8.x",
-    "postcss-cli": "^8.0.0",
-    "tailwindcss": "^3.x"
+    "@tailwindcss/postcss": "^4.1.8",
+    "autoprefixer": "^10.4.21",
+    "hugo-extended": "^0.147.6",
+    "postcss": "^8.5.4",
+    "postcss-cli": "^11.0.x",
+    "tailwindcss": "^4.1.8"
   },
   "engines": {
     "node": ">=18.20.4"
   },
   "scripts": {
-    "build": "hugo --gc --minify"
+    "build": "hugo build --enableGitInfo",
+    "build:azure": "hugo build --forceSyncStatic --logLevel info --gc --minify",
+    "serve": "hugo server --buildDrafts --buildExpired --buildFuture --renderToMemory",
+    "serve:slow": "hugo server --buildDrafts --buildExpired --buildFuture --cleanDestinationDir --disableFastRender --disableLiveReload --ignoreCache --logLevel info --noHTTPCache"
   }
 }
