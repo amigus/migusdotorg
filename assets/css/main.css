@@ -46,23 +46,26 @@
     @apply text-blue-600 hover:text-blue-800 visited:text-purple-600;
   }
 
-  code {
-    @apply font-mono whitespace-pre-wrap;
-  }
-
   pre {
-    @apply m-4 p-4 w-7/8 rounded-md;
+    @apply m-4 p-4 pt-3 w-4/5 rounded-sm;
+
+    code {
+      @apply font-mono bg-black text-white whitespace-pre-wrap;
+    }
+  }
+  
+  pre:has(> code.language-PowerShell) {
+    @apply bg-[#102456]!;
   }
 }
 
 @layer components {
   .container {
-    @apply m-auto w-auto;
+    @apply m-auto;
   }
-}
 
-@theme {
-  --font-mono: 'Open Sans';
-  --font-sans: Lato;
+  .copy-btn {
+    @apply absolute cursor-pointer top-2 right-2 p-1 opacity-80 transition-opacity duration-200 z-10;
+  }
 }
 
