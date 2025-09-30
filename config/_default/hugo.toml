@@ -6,9 +6,9 @@ title = 'migus.org'
 author = 'Adam Migus'
 copyright = '©️ 2024 Adam Migus. All rights reserved.'
 [markup]
-  [goldmark]
-    [parser]
-      [attribute]
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
         block = true
 [services]
   [services.googleAnalytics]
