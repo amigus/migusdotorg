@@ -4,7 +4,7 @@ keywords = ['amigus']
 summary = 'Adam Migus is a software engineer'
 +++
 
-I am a computer scientist and a technologist.
+I am a computer scientist and an information technologist.
 My first computer was an [8088](https://en.wikipedia.org/wiki/Intel_8088) I got in 1985!
 I learned to program in [BASIC](https://en.wikipedia.org/wiki/Microsoft_BASIC)
 and use [MS-DOS](https://en.wikipedia.org/wiki/MS-DOS) on it.
@@ -15,13 +15,13 @@ to read [Yahoo!](https://www.yahoo.com/)
 
 I got a B.Sc. in Computer Science from [Memorial University](https://mun.ca) in 2001.
 
-I started my company, [The Migus Group](https://migusgroup.com) in February 2014.
+I founded an IT services company, [The Migus Group](https://migusgroup.com) in February 2014.
 
-I have public profiles as "amigus" on
+I have a profile as "amigus" on
 [LinkedIn](https://www.linkedin.com/in/amigus/)
-and [X](https://x.com/amigus/)
-where, by the way, you can check the fingerprint of my GPG
-[key](/adam/public.asc).
+and some other platforms.
 
 I write software and publish some of it in [Gists](https://gist.github.com/amigus)
 and on my [GitHub](https://github.com/amigus).
+
+I use this GPG [key](/adam/public.asc) to sign my commits and releases.
