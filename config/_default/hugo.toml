@@ -10,6 +10,8 @@ copyright = '©️ 2024 Adam Migus. All rights reserved.'
     [markup.goldmark.parser]
       [markup.goldmark.parser.attribute]
         block = true
+  [markup.highlight]
+    style = 'rrt'
 [services]
   [services.googleAnalytics]
     id = 'G-0H4BE185DF'
