@@ -22,10 +22,10 @@ At the same time, configuring DNS now amounts to choosing a resolver instead of 
 [Dnsmasq](https://dnsmasq.org/doc.html), which combines DHCP and DNS _forwarding_ into a single server,
 makes offering both to a small network easy.
 
-This post is about two projects I created to organize and share the automation and managment software I wrote for it:
+This post is about the projects I created to organize and share the software I wrote to automate and manage Dnsmasq:
 
-- [amigus.dnsmasq](https://galaxy.ansible.com/ui/repo/published/amigus/dnsmasq/): a collection of Ansible Roles that install and configure Dnsmasq as both a DHCP and DNS server
-- [dnsmasq-web](https://github.com/amigus/dnsmasq-web): a REST (JSON/HTTP) API that provides web access to client, lease, and request data and reservation management.
+- [amigus.dnsmasq](https://galaxy.ansible.com/ui/repo/published/amigus/dnsmasq/): a collection of Ansible Roles that install and configure Dnsmasq as a DHCP and/or DNS server
+- [dnsmasq-web](https://github.com/amigus/dnsmasq-web): a REST (JSON/HTTP) API that provides access to client, lease, and request data and reservation management.
 
 ## Why Dnsmasq
 
@@ -38,7 +38,7 @@ The standard solution for this problem is to deploy an IP Address Management (IP
 
 ## Automation with Ansible
 
-Automation is following a consistent, efficient process to repeat the same action at scale. Ansible, a popular automation platform for Linux, does this well for configuration management across groups of servers. The user keeps an inventory of servers and manages the configuration data as declarative YAML. The configuration data is then applied to servers in the inventory by running tasks that translate it into configuration and state.
+Automation is following a consistent, efficient process to repeat the same action at scale. Ansible, a popular automation platform for Linux, does this well for configuration management across groups of servers. The user keeps an _inventory_ of servers and manages the configuration data as declarative YAML. The configuration data is then applied to servers in the inventory by running tasks that translate it into configuration and state.
 
 As a simple example, it can translate this YAML:
 
@@ -61,7 +61,7 @@ server=/wired.lan/192.168.1.253
 
 Ansible can also use data is collects from the server as task input.
 
-So, the configuration YAML can declare a server that leases the entire subnet starting from `.10` using `.1` as the gateway, like this:
+So, I can declare a server that leases the entire subnet starting from `.10` using `.1` as the gateway, like this:
 
 ```yaml
 ---
@@ -71,25 +71,25 @@ dnsmasq_dhcp_interfaces:
     start: 10
 ```
 
-The YAML does not need to contain the IP subnet information. Instead, Ansible derives it from the interface's IP address.
+The YAML does not need to contain the IP subnet information because Ansible gets it from the interface itself.
 
-So, if the `eth0` interface of the server is `192.168.100.2/24`, the resulting configuration parameters are:
+For example, if the `eth0` interface of the server is `192.168.100.2/24`, the resulting configuration parameters are:
 
 ```ini
 dhcp-range=interface:eth0,192.168.100.10,192.168.100.254
 dhcp-option=interface:eth0,option:router,192.168.100.1
 ```
 
-## Adding a Database and REST API
+## Adding a DHCP Database and REST API
 
 Running many small networks also requires real-time management of clients and DHCP leases on _some_ of them.
-Even on small networks, knowing which clients are leasing IP addresses when, now and in the past, can be essential.
+Even on small networks, knowing which clients are leasing IP addresses now and in the past, can be important.
 In other cases, users need manage DHCP reservations without updating the system.
 
 Dnsmasq itself does not use a database—it keeps _current_ lease information in a flat file—nor does it have an API.
 But it is extensible in two important ways.
 
-### The Database
+### The DHCP Database
 
 Dnsmasq has a feature that allows users to delegate DHCP lease management to a script.
 The [dnsmasq_dhcp_db](https://galaxy.ansible.com/ui/repo/published/amigus/dnsmasq/content/role/dnsmasq_dhcp_db/)
@@ -108,25 +108,26 @@ Both are optional and absent from the resulting configuration when not required.
 ## TL;DR
 
 While [Dnsmasq](https://dnsmasq.org/doc.html) is made for small networks and was not designed for automation or scalability,
-it can be scaled horizontally by managing the configuration with Ansible.
-It is also extensible, which [dnsmasq-web](https://github.com/amigus/dnsmasq-web) uses to a database and REST API.
+however, it can be scaled horizontally by managing the configuration with Ansible.
+It can also be extended, which [dnsmasq-web](https://github.com/amigus/dnsmasq-web) does to a DHCP database and REST API.
 
 ## Ansible Playbooks
 
 Based on examples in the amigus.dnsmasq [documentation](https://galaxy.ansible.com/ui/repo/published/amigus/dnsmasq/docs/):
 
-DHCP and DNS that uses the system resolver running on the gateway:
+DHCP and DNS server running on the gateway that uses `1.1.1.1` for DNS:
 
 ```yaml
 - hosts: dnsmasq
   vars:
     dnsmasq_dhcp_interfaces: [{ device: eth0, start: 10 }]
-    dnsmasq_dns_options: [bogus-priv, domain-needed]
+    dnsmasq_dns_options: [bogus-priv, domain-needed, no-resolv]
+    dnsmasq_dns_servers: [{ address: 1.1.1.1 }]
   roles:
     - amigus.dnsmasq.dnsmasq
 ```
 
-With a database and REST API running on `.2` with `.1` as the gateway:
+With a DHCP database and REST API running on `.2` with `.1` as the gateway:
 
 ```yaml
 - hosts: dnsmasq
@@ -138,7 +139,8 @@ With a database and REST API running on `.2` with `.1` as the gateway:
     dnsmasq_dhcp_db_script: /usr/sbin/dnsmasq-leasesdb
     dnsmasq_dns_hosts: |
       192.168.1.2 dnsmasq-server.servers.lan
-    dnsmasq_dns_options: [bogus-priv, domain-needed]
+    dnsmasq_dns_options: [bogus-priv, domain-needed, no-resolv]
+    dnsmasq_dns_servers: [{ address: 1.1.1.1 }]
     dnsmasq_web_binary: /usr/sbin/dnsmasq-web
   roles:
     - amigus.dnsmasq.dnsmasq
@@ -146,25 +148,29 @@ With a database and REST API running on `.2` with `.1` as the gateway:
 
 ### Run it
 
-Ansible needs [Python](https://www.python.org/)
-and the [netaddr](https://pypi.org/project/netaddr/) library.
-After installing those:
+Ansible is based on [Python](https://www.python.org/).
+The DHCP tasks need the [netaddr](https://pypi.org/project/netaddr/) library.
+After verifying that the environment includes both:
 
-1. Save either of the above examples as `playbook.yaml`
-1. Create an [Inventory](https://docs.ansible.com/ansible-core/2.19/inventory_guide/)
-   (or use the one below to target localhost) and save it as `inventory.yaml`
-1. Install Ansible, i.e., run `pip install ansible-core` or install it using a package manager.
-1. Run `ansible-galaxy collection install amigus.dnsmasq`
-1. Run `ansible-playbook -i inventory.yaml playbook.yaml`
+Save either of the above examples as `playbook.yaml`
 
-#### On localhost
+Create an [Inventory](https://docs.ansible.com/ansible-core/2.19/inventory_guide/)
+of `dnsmasq` servers or use the one below to target localhost,
+and save it as `inventory.yaml`
 
-To install on localhost, use this as your `inventory.yaml`:
+  ```yaml
+  ---
+  dnsmasq:
+    hosts:
+      localhost:
+        ansible_connection: local
+  ```
 
-```yaml
----
-dnsmasq:
-  hosts:
-    localhost:
-      ansible_connection: local
+Then install Ansible and the amigus.dnsmasq collection,
+then run the Playbook with `ansible-playbook`:
+
+```sh
+pip install ansible-core
+ansible-galaxy collection install amigus.dnsmasq
+ansible-playbook -i inventory.yaml playbook.yaml
 ```
