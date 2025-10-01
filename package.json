@@ -13,7 +13,7 @@
   "scripts": {
     "build": "hugo build --enableGitInfo",
     "build:azure": "hugo build --forceSyncStatic --logLevel info --gc --minify",
-    "serve": "hugo server --buildDrafts --buildExpired --buildFuture --renderToMemory",
-    "serve:slow": "hugo server --buildDrafts --buildExpired --buildFuture --cleanDestinationDir --disableFastRender --disableLiveReload --ignoreCache --logLevel info --noHTTPCache"
+    "serve": "hugo server --cleanDestinationDir",
+    "serve:drafts": "hugo server --buildDrafts --openBrowser --navigateToChanged --noBuildLock --renderToMemory"
   }
 }
