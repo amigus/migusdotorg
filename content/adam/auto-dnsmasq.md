@@ -9,7 +9,7 @@ keywords = [
 ]
 tags = ['dns', 'linux', 'networking']
 title = 'Automating and Managing Dnsmasq'
-summary = 'Using Ansible and dnsmasq-web to manage Dnsmasq servers'
+summary = 'Using Ansible and dnsmasq-web to automate and manage Dnsmasq servers'
 weight = 20
 +++
 
@@ -22,23 +22,35 @@ At the same time, configuring DNS now amounts to choosing a resolver instead of 
 [Dnsmasq](https://dnsmasq.org/doc.html), which combines DHCP and DNS _forwarding_ into a single server,
 makes offering both to a small network easy.
 
-This post is about the projects I created to organize and share the software I wrote to automate and manage Dnsmasq:
+This post is about the software have written, to automate and manage Dnsmasq:
 
 - [amigus.dnsmasq](https://galaxy.ansible.com/ui/repo/published/amigus/dnsmasq/): a collection of Ansible Roles that install and configure Dnsmasq as a DHCP and/or DNS server
 - [dnsmasq-web](https://github.com/amigus/dnsmasq-web): a REST (JSON/HTTP) API that provides access to client, lease, and request data and reservation management.
 
 ## Why Dnsmasq
 
-Dnsmasq is designed explicitly for small servers and networks. Many small/home office (SOHO) routers use it for DHCP and DNS forwarding. The libvirt API that I use also uses it to manage virtual networks, which is how I learned about it!
-One of the things that makes Dnsmasq flexible is that it accepts all the configuration parameters via the command line or (arbitrary) configuration files. However, while this makes it very flexible, the very terse syntax can make it difficult to write scripts for. In other words, the simplicity of Dnsmasq makes it great for managing a small network but not so great for managing many small networks at once.
+Dnsmasq is designed explicitly for small servers and networks.
+Many commercial small and home office (SOHO) routers use it as their DHCP and DNS server.
+The libvirt API that I use also uses it to manage virtual networks, which is how I learned about it!
+There are two things that makes Dnsmasq so flexible and suitable in those contexts;
+the management of domain and host names, DNS zones, DHCP leases and options, etc. are all extendable,
+and it accepts all configuration parameters via the command line or arbitrary configuration files.
+The extensibility makes scripting some things easier but the terse syntax makes other things more difficult.
+In a nut shell, the simplicity of Dnsmasq makes it great for managing _a_ small network but not so great for managing _many_ small networks at once.
 
 ## Why not an IPAM
 
-The standard solution for this problem is to deploy an IP Address Management (IPAM) solution. These solutions can reliably manage many networks, and most can delegate management of parts of the network. However, centralizing IP address management might not work as well when the networks have more autonomy. Simply automating management tools across networks to scale horizontally can work better in such cases.
+The standard solution for this problem is to deploy an IP Address Management (IPAM) solution.
+These solutions can reliably manage many networks, and most can delegate management of parts of the network.
+However, centralizing IP address management might not work as well when the networks have more autonomy.
+Simply automating management tools across networks to scale horizontally can work better in such cases.
 
 ## Automation with Ansible
 
-Automation is following a consistent, efficient process to repeat the same action at scale. Ansible, a popular automation platform for Linux, does this well for configuration management across groups of servers. The user keeps an _inventory_ of servers and manages the configuration data as declarative YAML. The configuration data is then applied to servers in the inventory by running tasks that translate it into configuration and state.
+Automation is following a consistent, efficient process to repeat the same action at scale.
+Ansible, a popular automation platform for Linux, does this well for configuration management across groups of servers.
+The user keeps an _inventory_ of servers and manages the configuration data as declarative YAML.
+Ansible then runs _tasks_ to translate the data into system configuration and state.
 
 As a simple example, it can translate this YAML:
 
@@ -103,7 +115,7 @@ The [dnsmasq_web](https://galaxy.ansible.com/ui/repo/published/amigus/dnsmasq/co
 role installs dnsmasq-web, which allows users to manage those DHCP lease reservations over HTTP.
 It also includes endpoints that provide client, lease and request information access.
 
-Both are optional and absent from the resulting configuration when not required.
+Both are optional and only present on the target system when the required options are present in the configuration YAML.
 
 ## TL;DR
 
@@ -148,8 +160,8 @@ With a DHCP database and REST API running on `.2` with `.1` as the gateway:
 
 ### Run it
 
-Ansible is based on [Python](https://www.python.org/).
-The DHCP tasks need the [netaddr](https://pypi.org/project/netaddr/) library.
+Ansible is a [Python](https://www.python.org/) program.
+The DHCP tasks need the Python [netaddr](https://pypi.org/project/netaddr/) library.
 After verifying that the environment includes both:
 
 Save either of the above examples as `playbook.yaml`
@@ -167,7 +179,7 @@ and save it as `inventory.yaml`
   ```
 
 Then install Ansible and the amigus.dnsmasq collection,
-then run the Playbook with `ansible-playbook`:
+then run the Playbook:
 
 ```sh
 pip install ansible-core
