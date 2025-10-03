@@ -22,7 +22,7 @@ At the same time, configuring DNS now amounts to choosing a resolver instead of 
 [Dnsmasq](https://dnsmasq.org/doc.html), which combines DHCP and DNS _forwarding_ into a single server,
 makes offering both to a small network easy.
 
-This post is about the software have written, to automate and manage Dnsmasq:
+This post is about the software wrote to automate and manage Dnsmasq:
 
 - [amigus.dnsmasq](https://galaxy.ansible.com/ui/repo/published/amigus/dnsmasq/): a collection of Ansible Roles that install and configure Dnsmasq as a DHCP and/or DNS server
 - [dnsmasq-web](https://github.com/amigus/dnsmasq-web): a REST (JSON/HTTP) API that provides access to client, lease, and request data and reservation management.
@@ -123,60 +123,41 @@ While [Dnsmasq](https://dnsmasq.org/doc.html) is made for small networks and was
 however, it can be scaled horizontally by managing the configuration with Ansible.
 It can also be extended, which [dnsmasq-web](https://github.com/amigus/dnsmasq-web) does to a DHCP database and REST API.
 
-## Ansible Playbooks
+## Run a server on localhost
 
-Based on examples in the amigus.dnsmasq [documentation](https://galaxy.ansible.com/ui/repo/published/amigus/dnsmasq/docs/):
+### Prerequisites
 
-DHCP and DNS server running on the gateway that uses `1.1.1.1` for DNS:
+Ansible is a [Python](https://www.python.org/) program.
+The DHCP tasks also need the Python [netaddr](https://pypi.org/project/netaddr/) library.
+So the system that will run Ansible needs both.
+Additionally, the target system must be an Alpine (apk), Redhat (dnf) or OpenSUSE (zypper) variant.
+In the example below, the same system will be both!
+
+To configure a DHCP and DNS server that runs _on the gateway_,
+leases the IP subnet starting from 10 and forwards all DNS to `1.1.1.1`,
+
+### Target localhost
+
+Create an [Inventory](https://docs.ansible.com/ansible-core/2.19/inventory_guide/),
+add the `localhost` to the `dnsmasq` group,
+add the required variables to `vars`,
+and save it as `inventory.yaml`:
 
 ```yaml
-- hosts: dnsmasq
+---
+dnsmasq:
+  hosts:
+    localhost:
+      ansible_connection: local
   vars:
     dnsmasq_dhcp_interfaces: [{ device: eth0, start: 10 }]
     dnsmasq_dns_options: [bogus-priv, domain-needed, no-resolv]
     dnsmasq_dns_servers: [{ address: 1.1.1.1 }]
-  roles:
-    - amigus.dnsmasq.dnsmasq
 ```
 
-With a DHCP database and REST API running on `.2` with `.1` as the gateway:
+:information_source: Omit `dnsmasq_dhcp_interfaces` to configure the server for DNS forwarding only.
 
-```yaml
-- hosts: dnsmasq
-  vars:
-    dnsmasq_dhcp_db: /var/lib/misc/dnsmasq.leases.db
-    dnsmasq_dhcp_domain: servers.lan
-    dnsmasq_dhcp_hosts_dir: /var/lib/misc/dnsmasq.hosts.d
-    dnsmasq_dhcp_interfaces: [{ device: eth0, router: 1, start: 100, end: 199 }]
-    dnsmasq_dhcp_db_script: /usr/sbin/dnsmasq-leasesdb
-    dnsmasq_dns_hosts: |
-      192.168.1.2 dnsmasq-server.servers.lan
-    dnsmasq_dns_options: [bogus-priv, domain-needed, no-resolv]
-    dnsmasq_dns_servers: [{ address: 1.1.1.1 }]
-    dnsmasq_web_binary: /usr/sbin/dnsmasq-web
-  roles:
-    - amigus.dnsmasq.dnsmasq
-```
-
-### Run it
-
-Ansible is a [Python](https://www.python.org/) program.
-The DHCP tasks need the Python [netaddr](https://pypi.org/project/netaddr/) library.
-After verifying that the environment includes both:
-
-Save either of the above examples as `playbook.yaml`
-
-Create an [Inventory](https://docs.ansible.com/ansible-core/2.19/inventory_guide/)
-of `dnsmasq` servers or use the one below to target localhost,
-and save it as `inventory.yaml`
-
-  ```yaml
-  ---
-  dnsmasq:
-    hosts:
-      localhost:
-        ansible_connection: local
-  ```
+### Run the playbook
 
 Then install Ansible and the amigus.dnsmasq collection,
 then run the Playbook:
@@ -184,5 +165,9 @@ then run the Playbook:
 ```sh
 pip install ansible-core
 ansible-galaxy collection install amigus.dnsmasq
-ansible-playbook -i inventory.yaml playbook.yaml
+ansible-playbook -i inventory.yaml amigus.dnsmasq.dnsmasq
 ```
+
+## Getting Started
+
+Check out the [documentation](https://amigus.github.io/dnsmasq-ansible) for more information and examples!
