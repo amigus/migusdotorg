@@ -31,16 +31,20 @@ This post is about the software wrote to automate and manage Dnsmasq:
 
 Dnsmasq is designed explicitly for small servers and networks.
 Many commercial small and home office (SOHO) routers use it as their DHCP and DNS server.
-The libvirt API that I use also uses it to manage virtual networks, which is how I learned about it!
-There are two things that makes Dnsmasq so flexible and suitable in those contexts;
+The libvirt API that I use also uses it to manage virtual networks,
+which is how I learned about it!
+There are two things that makes Dnsmasq so flexible and well-suited to those contexts;
 the management of domain and host names, DNS zones, DHCP leases and options, etc. are all extendable,
 and it accepts all configuration parameters via the command line or arbitrary configuration files.
-The extensibility makes scripting some things easier but the terse syntax makes other things more difficult.
-In a nut shell, the simplicity of Dnsmasq makes it great for managing _a_ small network but not so great for managing _many_ small networks at once.
+
+However, while the extensibility makes scripting everything possible,
+the terse syntax can be difficult to read and comprehend.
+And, while the simplicity of Dnsmasq makes it great for managing _a_ small network,
+it does not do anything to help with the task of managing _many_ small networks at once.
 
 ## Why not an IPAM
 
-The standard solution for this problem is to deploy an IP Address Management (IPAM) solution.
+The standard solution for that problem is to deploy an IP Address Management (IPAM) solution.
 These solutions can reliably manage many networks, and most can delegate management of parts of the network.
 However, centralizing IP address management might not work as well when the networks have more autonomy.
 Simply automating management tools across networks to scale horizontally can work better in such cases.
@@ -131,10 +135,12 @@ Ansible is a [Python](https://www.python.org/) program.
 The DHCP tasks also need the Python [netaddr](https://pypi.org/project/netaddr/) library.
 So the system that will run Ansible needs both.
 Additionally, the target system must be an Alpine (apk), Redhat (dnf) or OpenSUSE (zypper) variant.
-In the example below, the same system will be both!
+The same system will be _both_ in this case.
 
-To configure a DHCP and DNS server that runs _on the gateway_,
-leases the IP subnet starting from 10 and forwards all DNS to `1.1.1.1`,
+The variables below will configure DHCP to _itself_ as the network gateway,
+and leases the whole IP subnet starting from 10.
+It will also set itself as the DNS server and forward all queries to `1.1.1.1`.
+To configure the DNS part only, omit the `dnsmasq_dhcp_interfaces` variable:
 
 ### Target localhost
 
@@ -143,7 +149,7 @@ add the `localhost` to the `dnsmasq` group,
 add the required variables to `vars`,
 and save it as `inventory.yaml`:
 
-```yaml
+```yaml {hl_lines="7"}
 ---
 dnsmasq:
   hosts:
@@ -154,8 +160,6 @@ dnsmasq:
     dnsmasq_dns_options: [bogus-priv, domain-needed, no-resolv]
     dnsmasq_dns_servers: [{ address: 1.1.1.1 }]
 ```
-
-:information_source: Omit `dnsmasq_dhcp_interfaces` to configure the server for DNS forwarding only.
 
 ### Run the playbook
 
@@ -170,4 +174,5 @@ ansible-playbook -i inventory.yaml amigus.dnsmasq.dnsmasq
 
 ## Getting Started
 
-Check out the [documentation](https://amigus.github.io/dnsmasq-ansible) for more information and examples!
+Check out the [documentation](https://amigus.github.io/dnsmasq-ansible)
+for more information and examples!
