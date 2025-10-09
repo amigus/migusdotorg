@@ -6,7 +6,7 @@ homepage = "https://github.com/amigus/hugo-its-business"
 demosite = "https://migus.org"
 tags = ["blog", "personal", "business", "tailwind", "responsive"]
 features = ["responsive", "tailwindcss", "emoji support", "syntax highlighting"]
-min_version = "0.147.0"
+minVersion = "0.147.0"
 
 [author]
   name = "Adam Migus"
