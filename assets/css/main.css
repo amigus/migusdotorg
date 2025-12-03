@@ -1,33 +1,33 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css");
+
 @import "tailwindcss";
 
-@theme {
-  --font-mono: 'Fira Mono', monospace;
-  --font-sans: 'Fira Sans', sans-serif;
-}
-
 @layer base {
-  html {
-    @apply bg-gray-100 text-base/relaxed;
-  }
-
   h1 {
-    @apply font-bold sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl py-5;
+    @apply font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl py-5;
   }
 
   h2 {
-    @apply font-semibold sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl py-4;
+    @apply font-semibold text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl py-4;
   }
 
   h3 {
-    @apply sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl py-3;
+    @apply text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl py-3;
   }
 
-  h4 {
-    @apply sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl py-2;
+  h4, p {
+    @apply text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-sans;
+  h5 {
+    @apply text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl py-1;
+  }
+
+  h6 {
+    @apply text-xs md:text-xs lg:text-sm xl:text-base 2xl:text-lg py-1;
+  }
+  h1, h2, h3, h4, h5, h6, li, p {
+    @apply font-sans mx-3 p-2;
   }
 
   li {
@@ -53,17 +53,13 @@
       @apply font-mono bg-black text-white whitespace-pre-wrap;
     }
   }
-  
+
   pre:has(> code.language-PowerShell) {
     @apply bg-[#102456]!;
   }
 }
 
 @layer components {
-  .container {
-    @apply m-auto;
-  }
-
   .copy-btn {
     @apply absolute cursor-pointer top-2 right-2 p-1 opacity-80 transition-opacity duration-200 z-10;
   }

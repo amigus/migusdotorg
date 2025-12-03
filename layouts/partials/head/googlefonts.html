@@ -1,0 +1,11 @@
+{{- $fontFamilies := slice (replace .Site.Params.fonts.google.sans " " "+") (replace .Site.Params.fonts.google.mono " " "+") }}
+{{- range .Site.Params.fonts.google.extras }}
+{{- $fontFamilies = $fontFamilies | append (replace . " " "+") }}
+{{- end }}
+<link rel="stylesheet" href="{{ printf "https://fonts.googleapis.com/css?family=%s&display=swap" (delimit $fontFamilies "|") | safeURL }}">
+<style>
+  :root {
+    --font-sans: '{{ .Site.Params.fonts.google.sans }}', sans-serif;
+    --font-mono: '{{ .Site.Params.fonts.google.mono }}', monospace;
+  }
+</style>

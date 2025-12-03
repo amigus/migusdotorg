@@ -1,8 +1,0 @@
-<link rel="icon" type="image/png" href="{{ `favicon.ico` | absURL }}">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta charset="utf-8">
-<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ page.Title }}{{ end }}</title>
-{{- partialCached "head/css.html" . }}
-{{- partialCached "head/js.html" . }}
-{{- template "_internal/google_analytics.html" .}}
