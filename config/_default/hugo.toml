@@ -13,6 +13,7 @@ copyright = '©2024, 2025 Adam Migus'
   [markup.highlight]
     style = 'rrt'
 [params]
+  charset = 'utf-8'
   [params.fonts]
     [params.fonts.google]
       sans = 'Fira Sans'
