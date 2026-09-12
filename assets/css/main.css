@@ -78,3 +78,27 @@ body {
   }
 }
 
+/* Micro-interactions */
+a {
+  @apply transition-colors duration-200;
+}
+
+a:focus-visible,
+button:focus-visible {
+  @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-neutral-50 dark:ring-offset-neutral-950 rounded-sm;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
