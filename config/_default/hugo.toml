@@ -4,7 +4,7 @@ enableRobotsTXT = true
 languageCode = 'en-us'
 title = 'migus.org'
 author = 'Adam Migus'
-copyright = '©2024, 2025 Adam Migus'
+copyright = '2026 Adam Migus'
 [markup]
   [markup.goldmark]
     [markup.goldmark.parser]
@@ -14,11 +14,7 @@ copyright = '©2024, 2025 Adam Migus'
     style = 'rrt'
 [params]
   charset = 'utf-8'
-  [params.fonts]
-    [params.fonts.google]
-      sans = 'Fira Sans'
-      mono = 'Fira Mono'
-      extras = []
+  description = 'Adam Migus — software engineer and computer scientist'
 
 [services]
   [services.googleAnalytics]

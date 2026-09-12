@@ -1,68 +1,80 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css");
-
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-@layer base {
-  h1 {
-    @apply font-bold text-xl py-5;
-  }
+@font-face {
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('/fonts/fira-sans-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('/fonts/fira-sans-latin-500-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('/fonts/fira-sans-latin-700-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Fira Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('/fonts/fira-mono-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Fira Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('/fonts/fira-mono-latin-500-normal.woff2') format('woff2');
+}
 
-  h2 {
-    @apply font-semibold text-lg py-4;
-  }
+@theme {
+  --font-sans: "Fira Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Fira Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  h3 {
-    @apply text-base md:text-lg py-3;
-  }
+  --color-accent: oklch(0.55 0.18 252);
+  --color-accent-soft: oklch(0.92 0.04 252);
+  --color-ink: oklch(0.20 0.02 255);
+  --color-muted: oklch(0.50 0.02 255);
+}
 
-  h4, p {
-    @apply text-sm md:text-base py-2;
-  }
+html {
+  @apply antialiased scroll-smooth;
+}
 
-  h5 {
-    @apply text-xs md:text-sm py-1;
-  }
+body {
+  @apply bg-neutral-50 text-ink;
+  @apply dark:bg-neutral-950 dark:text-neutral-200;
+}
 
-  h6 {
-    @apply text-xs font-light py-1;
-  }
-  
-  h1, h2, h3, h4, h5, h6, li, p {
-    @apply font-sans mx-3 p-2;
-  }
-
-  li {
-    @apply mx-3;
-  }
-
-  li, p {
-    @apply px-3 py-2;
-  }
-
-  ol, ul {
-    @apply m-3;
-  }
-
-  a {
-    @apply text-blue-600 hover:text-blue-800 visited:text-purple-600;
-  }
-
-  pre {
-    @apply m-4 p-4 pt-3 w-4/5 rounded-sm bg-black text-white ;
-
-    code {
-      @apply font-mono whitespace-pre-wrap;
-    }
-  }
-
-  pre:has(> code.language-PowerShell) {
-    @apply bg-[#102456]!;
-  }
+::selection {
+  @apply bg-accent-soft text-ink;
 }
 
 @layer components {
   .copy-btn {
-    @apply absolute cursor-pointer top-2 right-2 p-1 opacity-80 transition-opacity duration-200 z-10;
+    @apply absolute top-2 right-2 z-10 cursor-pointer p-1.5 opacity-50 transition-opacity duration-200 hover:opacity-100;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light) {
+    color-scheme: dark;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html:not(.dark) {
+    color-scheme: light;
   }
 }
 

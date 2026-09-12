@@ -2,42 +2,41 @@
 <html lang="{{ site.LanguageCode | default `en-us` }}">
 <head>
     <meta charset="{{ site.Params.Charset | default `utf-8` }}">
-    <link rel="icon" type="image/png" href="{{ `favicon.ico` | absURL }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="{{ `favicon.ico` | absURL }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="/index.xml">
     <title>
       {{- if .IsHome -}}
       {{ site.Title }}
       {{- else -}}
-      {{ page.Title }}
+      {{ .Title }} · {{ site.Title }}
       {{- end -}}
     </title>
-    {{- if .Params.fonts.google }}
-      {{- partialCached "head/googlefonts.html" . }}
-    {{- end }}
+    {{- partial "head/meta.html" . }}
     {{- partialCached "head/css.html" . }}
     {{- partialCached "head/js.html" . }}
+    <script>
+      (function () {
+        var mq = window.matchMedia("(prefers-color-scheme: dark)");
+        document.documentElement.classList.toggle("dark", mq.matches);
+      })();
+    </script>
   </head>
-<body class="bg-gray-100 font-sans">
-  <header>
+<body class="font-sans min-h-screen bg-neutral-50 text-ink dark:bg-neutral-950 dark:text-neutral-200">
+  <header class="border-b border-neutral-200 dark:border-neutral-800">
     {{- partial "header.html" . }}
   </header>
-  <main>
+  <main class="mx-auto max-w-2xl px-5 py-12 sm:px-6">
     {{- block "main" . }}{{ end }}
   </main>
-  <footer>
-    {{- if not .IsHome }}
+  <footer class="mx-auto max-w-2xl px-5 pb-10 text-sm text-muted sm:px-6">
     <p>
-        <a id="up" href="..">../</a>
-    </p>
-    {{- end }}
-    <p class="font-light text-xs text-gray-600 m-auto">
-      {{  .RenderString ":copyright:" }}
+      {{ .RenderString ":copyright:" }}
       {{ .Site.Copyright }}.
       All rights reserved.
     </p>
   </footer>
-  {{- if .Site.Config.Services.GoogleAnalytics.ID }}
+  {{- if and (site.Config.Services.GoogleAnalytics.ID) (eq hugo.Environment "production") }}
   {{- template "_internal/google_analytics.html" . }}
   {{- end }}
 </body>

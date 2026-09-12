@@ -1,28 +1,26 @@
-// Add a copy to clipboard button to pre>code blocks
+const ICON_COPY = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+const ICON_CHECK = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+
 document.addEventListener('DOMContentLoaded', function () {
-	document.querySelectorAll('pre > code').forEach(function (codeBlock) {
-		const pre = codeBlock.parentElement;
-		// Avoid duplicate buttons
-		if (pre.querySelector('.copy-btn')) return;
-		const btn = document.createElement('button');
-		const icon = document.createElement("i");
-		btn.className = 'copy-btn';
-		btn.type = 'button';
-		btn.title = 'Copy to clipboard';
-		icon.className = "fa fa-clone";
-		icon.setAttribute("aria-hidden", "true");
-		btn.appendChild(icon);
-		btn.addEventListener('click', function () {
-			navigator.clipboard.writeText(codeBlock.innerText).then(() => {
-				icon.classList.remove('fa-clone');
-				icon.classList.add('fa-clipboard');
-				setTimeout(() => {
-					icon.classList.remove('fa-clipboard');
-					icon.classList.add('fa-clone');
-				}, 150);
-			});
-		});
-		pre.appendChild(btn);
-		pre.style.position = 'relative';
-	});
+  document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+    const pre = codeBlock.parentElement;
+    if (pre.querySelector('.copy-btn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.type = 'button';
+    btn.title = 'Copy to clipboard';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+    btn.innerHTML = ICON_COPY;
+    btn.addEventListener('click', async function () {
+      try {
+        await navigator.clipboard.writeText(codeBlock.innerText);
+        btn.innerHTML = ICON_CHECK;
+        setTimeout(() => { btn.innerHTML = ICON_COPY; }, 1500);
+      } catch (err) {
+        console.error('Copy failed', err);
+      }
+    });
+    pre.style.position = 'relative';
+    pre.appendChild(btn);
+  });
 });
