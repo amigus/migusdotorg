@@ -10,6 +10,19 @@
   "engines": {
     "node": ">=18.20.4"
   },
+  "packageManager": "pnpm@10.11.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "hugo-extended"
+    ]
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "10.11.0"
+    }
+  },
   "scripts": {
     "build": "hugo build --enableGitInfo",
     "build:azure": "hugo build --forceSyncStatic --logLevel info --gc --minify",

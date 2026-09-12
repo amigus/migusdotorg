@@ -1,0 +1,52 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "name": "Hugo: serve (drafts)",
+            "request": "launch",
+            "command": "pnpm run serve:drafts",
+            "cwd": "${workspaceFolder}",
+            "presentation": {
+                "group": "hugo",
+                "order": 1
+            }
+        },
+        {
+            "type": "node-terminal",
+            "name": "Hugo: serve",
+            "request": "launch",
+            "command": "pnpm run serve",
+            "cwd": "${workspaceFolder}",
+            "presentation": {
+                "group": "hugo",
+                "order": 2
+            }
+        },
+        {
+            "type": "node-terminal",
+            "name": "Hugo: build",
+            "request": "launch",
+            "command": "pnpm run build",
+            "cwd": "${workspaceFolder}",
+            "presentation": {
+                "group": "hugo",
+                "order": 3
+            }
+        },
+        {
+            "type": "node-terminal",
+            "name": "Hugo: build (azure)",
+            "request": "launch",
+            "command": "pnpm run build:azure",
+            "cwd": "${workspaceFolder}",
+            "presentation": {
+                "group": "hugo",
+                "order": 4
+            }
+        }
+    ]
+}
