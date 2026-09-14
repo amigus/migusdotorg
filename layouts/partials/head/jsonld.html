@@ -1,0 +1,71 @@
+{{- $isHome := .IsHome -}}
+{{- $isPersonPage := or $isHome (eq .RelPermalink "/adam/") -}}
+{{- if $isPersonPage -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Adam Migus",
+  "url": "{{ site.BaseURL }}",
+  "image": "{{ "social-card.png" | absURL }}",
+  "jobTitle": "Software Engineer & Computer Scientist",
+  "description": {{ site.Params.description | jsonify }},
+  "email": "mailto:adam@migus.org",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "The Migus Group",
+    "url": "https://migusgroup.com"
+  },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Memorial University, Newfoundland and Labrador",
+    "url": "https://mun.ca"
+  },
+  "knowsAbout": [
+    "Cloud Infrastructure",
+    "Computer Networking",
+    "Computer Science",
+    "Cybersecurity",
+    "FreeBSD MAC Framework",
+    "Information Technology",
+    "Software Engineering",
+  ],
+  "sameAs": [
+    "https://github.com/amigus",
+    "https://www.linkedin.com/in/amigus/",
+    "https://x.com/amigus",
+    "https://gist.github.com/amigus"
+  ]
+}
+</script>
+{{- end -}}
+{{- if and (not $isHome) (eq .Type "adam") -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ .Description | default .Summary | plainify | jsonify }},
+  "url": "{{ .Permalink }}",
+  "author": {
+    "@type": "Person",
+    "name": "Adam Migus",
+    "url": "{{ site.BaseURL }}"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Adam Migus"
+  },
+  {{- with .Date }}
+  "datePublished": "{{ .Format "2006-01-02T15:04:05Z07:00" }}",
+  {{- end }}
+  {{- with .Lastmod }}
+  "dateModified": "{{ .Format "2006-01-02T15:04:05Z07:00" }}",
+  {{- end }}
+  {{- with .Params.tags }}
+  "keywords": {{ . | jsonify }},
+  {{- end }}
+  "mainEntityOfPage": "{{ .Permalink }}"
+}
+</script>
+{{- end -}}

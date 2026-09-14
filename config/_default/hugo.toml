@@ -3,7 +3,6 @@ enableEmoji = true
 enableRobotsTXT = true
 languageCode = 'en-us'
 title = 'migus.org'
-author = 'Adam Migus'
 copyright = '2026 Adam Migus'
 [markup]
   [markup.goldmark]
@@ -15,6 +14,14 @@ copyright = '2026 Adam Migus'
 [params]
   charset = 'utf-8'
   description = 'Adam Migus — software engineer and computer scientist'
+  image = 'social-card.png'
+
+  [params.author]
+    name = 'Adam Migus'
+    email = 'adam@migus.org'
+    github = 'amigus'
+    linkedin = 'amigus'
+    twitter = 'amigus'
 
 [services]
   [services.googleAnalytics]
