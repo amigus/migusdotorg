@@ -5,7 +5,6 @@
 </article>
 
 <section class="mt-16">
-  <h2 class="text-2xl font-extrabold tracking-tight">Posts</h2>
   <ul class="mt-8 space-y-10">
     {{- range where .Pages.ByDate.Reverse "File.BaseFileName" "not in" (slice "now" "about") }}
     <li class="group">

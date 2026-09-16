@@ -1,7 +1,11 @@
 +++
 title = 'Posts'
 keywords = ['amigus']
-summary = 'Posts and notes from Adam Migus.'
+summary = 'Posts about me, my work and my life.'
 +++
 
-I'm **Adam Migus** — software engineer, cybersecurity expert, founder of [The Migus Group](https://migusgroup.com), creator of [CloudServers.app](https://cloudservers.app), and author of the [Lisa Framework](https://github.com/Lisa-Framework).
+Posts by **Adam Migus**, an AI-first software engineer,
+cybersecurity expert,
+internet technologist,
+creator of [CloudServers.app](https://cloudservers.app)
+and the author of [Lisa](https://github.com/Lisa-Framework).
