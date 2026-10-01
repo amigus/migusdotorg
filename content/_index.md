@@ -2,10 +2,10 @@
 title = 'migus.org'
 +++
 
-I'm **Adam Migus** —
+I'm [**Adam Migus**](adam) —
 founder of [The Migus Group](https://migusgroup.com),
 creator of [CloudServers.app](https://cloudservers.app),
-and author of the [Lisa Framework](https://github.com/Lisa-Framework),
+and author of the [Lisa Harness](https://github.com/Lisa-Harness),
 and this is my "personal" domain. :thinking::writing_hand:
 
 I registered it back in March 2002 to host my email and a website.
