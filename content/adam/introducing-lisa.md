@@ -1,21 +1,19 @@
 +++
-date = 2026-10-19
+date = 2026-10-20
 draft = false
 keywords = ["ai", "agent", "harness", "lisa", "llm"]
-tags = ["ai", "agents", "open-source"]
+tags = ["ai", "agents", "harness", "open-source"]
 summary = "An introduction to Lisa, the open-source AI agent harness: enforceable limits, receipt-based verification, and lossless context."
 title = 'Introducing Lisa'
 +++
 
 Lisa is an open-source AI agent harness and runtime.
-Agent frameworks make models capable of action,
-but most don't do much to make them account for it.
-I built Lisa to close that gap,
-with two overarching principles top of mind:
-reliability and safety.
-Both trace back to the same conclusion:
-Copilot, Claude et al. trust the model instead of constraining it.
-Designing around those principles led to Lisa's defining features:
+An agent is a model that is capable of action using "tools."
+There are a lot of frameworks that help you create and manage them.
+The trouble is they all trust the model to do the right thing.
+I don't and I don't think you should have to.
+So I built Lisa to close that gap.
+The result is a harness with some unique features:
 
 - **Budgets and limits**: the model operates within a budget;
   if it overruns the budget, then it becomes an enforced limit.
@@ -26,7 +24,9 @@ Designing around those principles led to Lisa's defining features:
 - **Verifiable actions**: intention drives action, and action has an effect;
   and it uses that relationship to drive receipt-based verification.
 
-## Why
+![Saying "hi" to Lisa](/img/introducing-lisa/pristine-start.gif)
+
+## How it started
 
 I've been writing software since the 1990s.
 So when AI-assisted software engineering became a real thing in 2025,
@@ -37,36 +37,26 @@ than I ever could before.
 And so,
 that's what I did!
 I started building a big thing with AI:
-[CloudServers.app][cloudServersLink].
+[CloudServers][cloudServersLink].
 
-I used [Visual Studio Code][visualStudioCodeLink], which includes Copilot.
+I used VSCode, a popular IDE which includes Copilot.
 And as I got closer to launch in early 2026,
 I created a Copilot agent named "Launch Scale Advisor,"
 which I abbreviated as LSA,
-to help me plan and execute the launch!
+to help me plan and execute the launch.
 That led me to want LSA to help me with non-coding-related tasks.
 The trouble was, I didn't trust Copilot to do non-coding things!
 
-By the time I got to building the operational support capabilities,
-I had become convinced of two things:
+My conversations with LSA convinced of two things:
 
 1. I want an AI-driven approach to operations and support,
    but not just technical, business and finance too.
-2. Copilot/Claude agents and "skills" weren't enough.
+2. Copilot/Claude agents and "skills" weren't going to cut it.
 
-### Model-action intermediation
-
-The biggest problem to me was that the trust ran in the wrong direction,
-and it showed in the implementation.
 Yes, you could limit the tools that are available to the agent,
 but the way it was implemented did not constitute a hard (enforceable) boundary.
-
-Then there were "skills," the agent + prompt [+ tool] reuse pattern,
-which to me,
-was too ill-defined and unstructured.
-For one thing,
-I thought there needed to be a first-class definition of "tool."
-I also wanted a way to create reusable instances of model-tool use.
+And skills; the prompt-tool reuse pattern baked into Claude, Copilot et al.,
+lacked the structures and boundaries to serve as the foundation.
 
 ## Why not an existing library?
 
@@ -84,9 +74,9 @@ All defensible designs effectively tackling their concerns,
 but none of them were addressing mine.
 I didn't need help building agents;
 I needed the runtime to constrain the model inside the turn loop.
-So the decision not to use them was pragmatic, not ideological.
+So I decided the best thing to do was build from scratch.
 
-The thing is,
+The thing is, I was reluctant.
 I had major FOMO after seeing everything they were doing!
 Those existing libraries had a lot of momentum and support,
 and if they built something useful to me,
@@ -129,7 +119,7 @@ If the model ignores the budget,
 the harness steps in and enforces it as a hard limit —
 the model is not in control.
 
-![Terminal recording of Lisa enforcing a turn budget: the model hits a limit mid-turn and the harness cuts it off](/img/introducing-lisa/enforced-limit.gif)
+![Lisa enforcing a turn budget](/img/introducing-lisa/enforced-limit.gif)
 
 ### Dynamic model use
 
