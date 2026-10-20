@@ -210,8 +210,6 @@ allowed_operation_ids:
   - synthesize_and_store_learning
 ```
 
-[[ASSET: terminal capture or short recording — end-of-turn receipt collection: intended action, receipt issued, collection summary. If you can capture an outstanding receipt being flagged as unfulfilled, use that instead — it is the money shot.]]
-
 #### Mode Switching
 
 If the user or model expresses a different intended action during the turn,
