@@ -1,15 +1,20 @@
 +++
 date = 2026-10-19
-draft = false
+draft = true
 keywords = ["ai", "agent", "harness", "lisa", "llm"]
-tags = ["ai", "linux"]
-summary = "An introduction to Lisa, the open-source AI agent harness."
+tags = ["ai", "agents", "open-source"]
+summary = "An introduction to Lisa, the open-source AI agent harness: enforceable limits, receipt-based verification, and lossless context."
 title = 'Introducing Lisa'
 +++
 
 Lisa is an open-source AI agent harness and runtime.
-I built it with two overarching principles top of mind:
+Agent frameworks make models capable of action,
+but most don't do much to make them account for it.
+I built Lisa to close that gap,
+with two overarching principles top of mind:
 reliability and safety.
+Both trace back to the same conclusion:
+Copilot, Claude et al. trust the model instead of constraining it.
 Designing around those principles led to Lisa's defining features:
 
 - **Budgets and limits**: the model operates within a budget;
@@ -51,8 +56,8 @@ I had become convinced of two things:
 
 ### Model-action intermediation
 
-The biggest problem to me was that Copilot,
-Claude et al. trust the model instead of constraining it.
+The biggest problem to me was that the trust ran in the wrong direction,
+and it showed in the implementation.
 Yes, you could limit the tools that are available to the agent,
 but the way it was implemented did not constitute a hard (enforceable) boundary.
 
@@ -63,15 +68,23 @@ For one thing,
 I thought there needed to be a first-class definition of "tool."
 I also wanted a way to create reusable instances of model-tool use.
 
-## Why not $library
+## Why not an existing library?
 
-Libraries at the time were focused on helping users build agents.
-They made it easier to use models, memory, storage, and yes, tools.
-But none seemed intentional about intermediation or model constraints.
-Nor were they tackling the model-tool concerns I had.
-Knowing that my concerns meant serious changes to the turn loop,
-and that no one shared my concerns,
-I opted to build it from scratch.
+LangChain and LangGraph are excellent at helping you build agents —
+LangGraph in particular gives you durable,
+stateful orchestration with checkpointing and human-approval gates.
+CrewAI makes multi-agent collaboration accessible,
+with role-based crews you can stand up quickly.
+And Pi — Lisa's closest cousin — is a minimal,
+extensible harness whose bet is the opposite of mine:
+adapt the harness to your workflows,
+rather than codify semantics into the harness itself.
+
+All defensible designs effectively tackling their concerns,
+but none of them were addressing mine.
+I didn't need help building agents;
+I needed the runtime to constrain the model inside the turn loop.
+So the decision not to use them was pragmatic, not ideological.
 
 The thing is,
 I had major FOMO after seeing everything they were doing!
@@ -111,8 +124,12 @@ Lisa tells the model how many iterations it can run,
 how many tool calls it can make,
 and how many mode switches it can complete,
 before the turn is complete.
+The budget is a request the model can see and plan around.
 If the model ignores the budget,
-the harness steps in to enforce it as a hard limit.
+the harness steps in and enforces it as a hard limit —
+the model is not in control.
+
+![Terminal recording of Lisa enforcing a turn budget: the model hits a limit mid-turn and the harness cuts it off](/img/introducing-lisa/enforced-limit.gif)
 
 ### Dynamic model use
 
@@ -159,45 +176,31 @@ It also lets Lisa reproduce any past response verbatim.
 ### Verifiable actions
 
 Lisa gets receipts!
-It tracks intended action in terms of its "effect,"
+When the turn input matches a mode's intent,
+the harness switches modes.
+The mode declares its effect —
 *read*,
 *write* (the default),
 *execute*,
- or *external_write*.
-When the model takes an action,
-it produces a receipt,
-then it collects all outstanding receipts on completion.
-So if the model intends to complete an action but does not complete it,
-Lisa knows. But how does it know the model intended to take action?
-
-That's where *modes* come in.
-When the turn input matches a mode's intent,
-the harness switches modes.
-Whatever effect that mode declares, e.g., *write*,
-the harness produces and collects a receipt for that mode→effect pair.
+or *external_write*.
+When the model takes the action,
+it produces a receipt.
+When the turn completes,
+the harness collects every outstanding receipt.
+So: intent → mode → effect → receipt → collection.
+An outstanding is a broken promise —
+the model intended an action and did not complete it.
+Lisa knows that and tells you.
 
 ```yaml
 routing_intent_tags: [code, write, implement]
 satisfies_intents: [code, write, implement]
 routing_intent_keywords:
-  implement:
-    - implement
-    - refactor
-    - patch
-  code:
-    - write code
-    - write the code
-    - code it
-    - generate code
-    - add code
-    - modify code
-    - edit code
-  write:
-    - write code
-    - write the code
+  implement: [implement, refactor, patch]
+  code: [write code, generate code, edit code]
 ```
 
-Modes also declare which operations and tools the model can use.
+Modes also declare which operations and tools the model can use:
 
 ```yaml
 allowed_operation_ids:
@@ -205,12 +208,9 @@ allowed_operation_ids:
   - fork
   - recall_memory
   - synthesize_and_store_learning
-allowed_tool_ids:
-  - coding_apply_patch
-  - coding_run_check
-  - coding_status
-  - coding_commit
 ```
+
+[[ASSET: terminal capture or short recording — end-of-turn receipt collection: intended action, receipt issued, collection summary. If you can capture an outstanding receipt being flagged as unfulfilled, use that instead — it is the money shot.]]
 
 #### Mode Switching
 
@@ -233,7 +233,7 @@ and Linux and Windows shell access.
 
 It's also easy to create your own!
 
-### Using Lisa
+## Using Lisa
 
 The [lisa](https://github.com/Lisa-Harness/lisa) project
 is an abstract kernel and runtime.
@@ -242,7 +242,7 @@ i.e.,
 it is not a running process or service,
 nor does it have a transport.
 
-#### Chat
+### Chat
 
 However,
 the [lisa-cli](https://github.com/Lisa-Harness/lisa-cli) project
@@ -259,7 +259,7 @@ You can also provide command output as input:
 ls mystery_file*.txt | lisa prompt "how did these get here?"
 ```
 
-#### Automation
+### Automation
 
 Lisa also has the `intake` sub-command for passive information processing.
 It collects state, processes, and makes it available as input (context) for the next turn.
@@ -268,13 +268,24 @@ Then the next turn sees that state as "ambient" context.
 
 ## Getting Lisa
 
-Lisa is available as free open-source on [GitHub](https://github.com/Lisa-Harness).
+Lisa is available as free open-source under the MIT license on
+[GitHub](https://github.com/Lisa-Harness).
 The kernel,
 SDK,
 runtime, and built-in packs are in the [lisa](https://github.com/Lisa-Harness/lisa) repository.
 The runnable host is in the [lisa-cli](https://github.com/Lisa-Harness/lisa-cli) repository.
 The [Getting Started][gettingStartedLink] will help you install it via `pip` or `uv`.
 Or just use the [installer](https://github.com/Lisa-Harness/lisa-cli#run-the-installer).
+If you build a pack, find a bug, or disagree with a design call,
+the issues are open.
+
+The ecosystem will keep making models more capable.
+Lisa is a bet on the other half:
+making them accountable.
+If you have ever wanted an agent that does what it says it will do —
+and shows you the receipts when it doesn't —
+that is the harness I built.
+I hope it becomes yours too.
 
 [cloudServersLink]: https://cloudservers.app
 [routerReadmeLink]: https://github.com/Lisa-Harness/lisa/blob/main/sdk/src/sdk/router/README.md
