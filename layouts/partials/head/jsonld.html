@@ -39,7 +39,7 @@
 }
 </script>
 {{- end -}}
-{{- if and (not $isHome) (eq .Type "adam") -}}
+{{- if and (not $isHome) (or (eq .Type "adam") (eq .Type "lisa")) -}}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

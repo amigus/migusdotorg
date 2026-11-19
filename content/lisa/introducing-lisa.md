@@ -3,6 +3,7 @@ date = 2026-10-20
 draft = false
 keywords = ["ai", "agent", "harness", "lisa", "llm"]
 tags = ["ai", "agents", "harness", "open-source"]
+aliases = ['/adam/introducing-lisa/']
 summary = "An introduction to Lisa, the open-source AI agent harness: enforceable limits, receipt-based verification, and lossless context."
 title = 'Introducing Lisa'
 +++

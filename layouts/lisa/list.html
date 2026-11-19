@@ -1,0 +1,28 @@
+{{ define "main" }}
+<article class="theme-lisa prose prose-neutral dark:prose-invert prose-lg prose-headings:font-extrabold prose-headings:tracking-tight prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-pre:rounded-lg">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</article>
+
+<section class="theme-lisa mt-16">
+  <ul class="mt-8 space-y-10">
+    {{- range .Pages.ByDate.Reverse }}
+    <li class="group">
+      <a href="{{ .RelPermalink }}" class="block -mx-2 px-2 py-2 rounded-md transition-all duration-200 hover:bg-neutral-100 dark:hover:bg-neutral-900">
+        <h3 class="text-xl font-semibold leading-snug tracking-tight text-ink transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-accent dark:text-neutral-100">
+          {{ .Title }}
+        </h3>
+        {{- with .Summary }}
+        <p class="mt-2 text-base leading-relaxed text-muted">
+          {{ . | plainify | truncate 140 }}
+        </p>
+        {{- end }}
+      </a>
+      <time datetime="{{ .Date.Format "2006-01-02" }}" class="mt-1 block px-2 text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+        {{ .Date.Format "January 2006" }}
+      </time>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{ end }}
