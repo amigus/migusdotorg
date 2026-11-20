@@ -4,7 +4,7 @@ draft = false
 keywords = ["ai", "agent", "harness", "lisa", "llm"]
 tags = ["ai", "agents", "harness", "open-source"]
 aliases = ['/adam/introducing-lisa/']
-summary = "An introduction to Lisa, the open-source AI agent harness: enforceable limits, receipt-based verification, and lossless context."
+summary = "A powerful free open-source AI agent harness and MCP-based runtime."
 title = 'Introducing Lisa'
 +++
 

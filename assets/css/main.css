@@ -47,6 +47,13 @@
   --color-muted: oklch(0.50 0.02 255);
 }
 
+/* Scoped Lisa theme: retheme accent (and derived tones) within a section */
+.theme-lisa {
+  --color-accent: oklch(0.55 0.19 295);
+  --color-accent-soft: oklch(0.92 0.05 295);
+  --color-muted: oklch(0.50 0.03 295);
+}
+
 html {
   @apply antialiased scroll-smooth;
 }

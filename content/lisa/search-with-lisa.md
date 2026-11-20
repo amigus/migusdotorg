@@ -3,7 +3,7 @@ date = 2026-11-19
 draft = false
 keywords = ["ai", "agent", "harness", "lisa", "llm"]
 tags = ["ai", "agents", "harness", "open-source"]
-summary = "Using lisa-cli to search the web with Lisa by adding a provider pack and API key."
+summary = "Install lisa-cli and learn how to use it by configuring it to search the web."
 title = "Search the web with Lisa"
 +++
 
@@ -12,6 +12,7 @@ This post will guide you through installing
 and enabling web search. :globe_with_meridians:
 It’s an essential capability,
 and enabling it helps you understand the basics of running Lisa,
+including *modes* and model budgets and limits,
 so it’s a great way to get started! :rocket:
 
 The plan:
@@ -21,6 +22,7 @@ The plan:
 3. Set the search provider API key
 4. Enable the search provider
 5. Search the web
+6. Budgeting and limits
 
 ## LLM/model access
 
@@ -130,3 +132,49 @@ so it looks like the above.
 ```sh
 lisa prompt "research my favorite thing."
 ```
+
+The correctness and quality of the response depend a lot on the model and the prompt.
+So you will almost certainly want to change the model at some point.
+You can do that by editing `~/.lisa/state/models.proposed.yaml`,
+then running `lisa models apply` after making the changes.
+You can set default and per-mode model mappings.
+You can also define "routes" set models dynamically.
+
+## Budgeting and limits
+
+One of the defining features of Lisa are the budgets and limits.
+Lisa counts everything and does not just let the model run.
+
+Iterations, tool calls, mode changes, and of course tokens,
+all have "budgets" and "limits."
+The budget instructs the model stay within its limits.
+The harness stops the model when if it hits one anyway. :stop_sign:
+This helps a lot with efficiency and reducing token waste but,
+it can also cause annoying pauses in useful work.
+
+### The stage limit
+
+The first limit that you eventually hit with Lisa is the stage limit.
+Depending on the model and the prompt,
+the number of iterations a model wants to spend in a mode before switching,
+i.e., a "stage," can vary.
+But Lisa also sets a budget and enforces limits,
+so it cannot just iterate forever!
+
+The harness handles this by adding a "nudge" instruction to the prompt after the iteration hits a configurable *threshold*.
+It tells the model that it should switch modes or finish the turn.
+If the model ignores the nudge,
+the harness stops the model at the limit,
+and pauses or ends the turn.
+
+The variables that set the model nudge and harness-enforced limit are in the .env file as `STAGE_NUDGE_THRESHOLD=7` and `STAGE_NUDGE_CAP=10` respectively.
+The defaults are reasonable for typical notebook workflows, but,
+`STAGE_NUDGE_THRESHOLD=11` and `STAGE_NUDGE_CAP=35`
+works better for more intense work, e.g.,
+using the [coding](https://github.com/Lisa-Harness/lisa-pack-coding) pack.
+
+## Introducing Lisa
+
+If you skipped the [intro](../introducing-lisa) to get straight into running Lisa,
+congratulations, you did it! :tada:
+So maybe now might be a good time to check it out! :wink:
