@@ -6,11 +6,10 @@ summary = 'Adam Migus is a software engineer and computer scientist.'
 weight = 1
 +++
 
-I am an AI-first software engineer,
-cybersecurity expert,
-computer scientist,
-and information technologist .
-I'm also an old.
+I am a software engineer and cybersecurity expert specializing in IAM/PAM,
+networking, systems, and zero-trust.
+I'm also an old—I've been doing that for 30 years.
+
 My first computer was an [8088](https://en.wikipedia.org/wiki/Intel_8088) I got in 1985!
 I learned to program in [BASIC](https://en.wikipedia.org/wiki/Microsoft_BASIC)
 and use [MS-DOS](https://en.wikipedia.org/wiki/MS-DOS) on it.
@@ -23,10 +22,14 @@ to read [Yahoo!](https://www.yahoo.com/) in 1995 but I spent more time using [Ar
 
 I got a B.Sc. in Computer Science from [Memorial University](https://mun.ca) in 2001 :mortar_board:.
 From there I went to work for a federally funded technology lab that no longer exists :shrug:.
-But not all was lost, the contributions I made to the FreeBSD [MAC Framework](https://docs.freebsd.org/en/books/arch-handbook/mac/) while working there were free and open source.
-I have continued to create and contribute to various open source projects over the years.
-I publish what I create in [Gists](https://gist.github.com/amigus)
-and on [GitHub](https://github.com/amigus).
+But not all was lost, the contributions I made to the FreeBSD [MAC Framework](https://docs.freebsd.org/en/books/arch-handbook/mac/) while working there live on as free and open source.
+
+I have always created and contributed to open source projects. :book:
+I publish what I create on [GitHub](https://github.com/amigus)
+and in [Gists](https://gist.github.com/amigus).
 I use this [GPG key](/adam/public.asc) to sign my commits and releases. :key:
 
-I am on [LinkedIn](https://www.linkedin.com/in/amigus/) :briefcase: where I detail my professional experience which includes 8 years in software security and architecture and engineering roles in financial services :bank: before ultimately founding my IT services company, [The Migus Group](https://migusgroup.com) in 2014, to enable me to contract independently and provide specialized IT services to a range of clients. I'm also on [X](https://x.com/amigus) where I share updates and insights about whatever I'm working on. Currently that's [CloudServers.app](https://cloudservers.app) :cloud::desktop_computer: — and [Lisa Harness](https://github.com/Lisa-Harness). :robot::toolbox:
+I am on [LinkedIn](https://www.linkedin.com/in/amigus/) :briefcase:where I detail my professional experience which includes 8 years in software security and architecture and engineering roles in financial services :bank: before ultimately founding my IT services company,
+[The Migus Group](https://migusgroup.com) :office: in 2014, so I could contract independently and provide specialized IT services to a range of clients.
+I'm also on [X](https://x.com/amigus) where I share updates and insights about whatever I'm working on.
+Currently that's [CloudServers.app](https://cloudservers.app) :cloud::desktop_computer: — and [Lisa Harness](https://github.com/Lisa-Harness). :robot::toolbox:

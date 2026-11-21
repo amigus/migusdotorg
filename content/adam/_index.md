@@ -4,8 +4,8 @@ keywords = ['amigus']
 summary = 'Posts about me, my work and my life.'
 +++
 
-Posts by **Adam Migus**, an AI-first software engineer,
+Posts by **Adam Migus**,
+a software engineer,
 cybersecurity expert,
-internet technologist,
-creator of [CloudServers.app](https://cloudservers.app)
-and the author of [Lisa](/lisa/).
+the author of [Lisa](/lisa/),
+and the creator of [CloudServers.app](https://CloudServers.app)

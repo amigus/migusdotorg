@@ -19,10 +19,11 @@ The plan:
 
 1. LLM/model access
 2. Run the lisa-cli installer
-3. Set the search provider API key
-4. Enable the search provider
+3. Enable the search provider
+4. Set the provider API key
 5. Search the web
 6. Budgeting and limits
+7. Next steps
 
 ## LLM/model access
 
@@ -86,15 +87,6 @@ irm https://raw.githubusercontent.com/Lisa-Harness/lisa-cli/main/install.ps1 | i
 
 Look for **All checks passed** in the output after the installation completes.
 
-## Set the search provider API key
-
-The .env file contains `BRAVE_`, `SERPER_`, and `TAVILY_` variables.
-Follow the same process to find them, uncomment them, and set them. E.g.
-
-```sh
-TAVILY_SEARCH_API_KEY=tvly-dev-...
-```
-
 ## Enable the search provider
 
 To enable the search provider,
@@ -127,6 +119,15 @@ providers:
 so be sure to replace each '#' with exactly one space,
 so it looks like the above.
 
+## Set the provider API key
+
+The .env file contains `BRAVE_`, `SERPER_`, and `TAVILY_` variables.
+Follow the same process to find them, uncomment them, and set them. E.g.
+
+```sh
+TAVILY_SEARCH_API_KEY=tvly-dev-...
+```
+
 ## Search the web
 
 ```sh
@@ -148,7 +149,7 @@ Lisa counts everything and does not just let the model run.
 Iterations, tool calls, mode changes, and of course tokens,
 all have "budgets" and "limits."
 The budget instructs the model stay within its limits.
-The harness stops the model when if it hits one anyway. :stop_sign:
+The harness stops the model when it hits one anyway. :stop_sign:
 This helps a lot with efficiency and reducing token waste but,
 it can also cause annoying pauses in useful work.
 
@@ -173,8 +174,9 @@ The defaults are reasonable for typical notebook workflows, but,
 works better for more intense work, e.g.,
 using the [coding](https://github.com/Lisa-Harness/lisa-pack-coding) pack.
 
-## Introducing Lisa
+## Next steps
 
-If you skipped the [intro](../introducing-lisa) to get straight into running Lisa,
-congratulations, you did it! :tada:
-So maybe now might be a good time to check it out! :wink:
+Congratulations! :tada:
+You are using Lisa and you understand the core concepts! :white_check_mark:
+I highly recommend reading the [intro](../introducing-lisa) if you haven't already.
+And don't forget to :star: the [repo](https://github.com/Lisa-Harness/lisa)! :relaxed:
